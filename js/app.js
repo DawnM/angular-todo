@@ -1,26 +1,18 @@
-angular.module('TodoApp', ['ngRoute', 'RouteControllers', 'UserService', 'angular-storage', 'TodoService', 'TodoDirective']);
+angular.module('RouteControllers', [])
+	
+	.controller('HomeController', function($scope) {
+		$scope.title = "Welcome To Angular Todo!"
+	})
+	
+	.controller('RegisterController', function($scope) {
+		$scope.registrationUser = {};
 
-angular.module('TodoApp').config(function($locationProvider, $routeProvider) {
-	$locationProvider.html5Mode(true); // Enable href routing without hashes
-
-	$routeProvider.when('/', {
-		templateUrl: 'templates/home.html',
-		controller: 'HomeController'
-	})
-	.when('/accounts/register', {
-		templateUrl: 'templates/register.html',
-		controller: 'RegisterController'
-	})
-	.when('/accounts/login', {
-		templateUrl: 'templates/login.html',
-		controller: 'LoginController'
-	})
-	.when('/todo', {
-		templateUrl: 'templates/todo.html',
-		controller: 'TodoController'
-	})
-	.when('/todo/edit/:id', {
-		templateUrl: 'templates/edit-todo.html',
-		controller: 'EditTodoController'
-	});
-});
+		$scope.submitForm = function() {
+            if ($scope.registrationForm.$valid) {
+                $scope.registrationUser.username = $scope.user.username;
+                $scope.registrationUser.password = $scope.user.password;
+            }
+ 
+        	console.log($scope.registrationUser.username + " " + $scope.registrationUser.password);
+    	};
+    });
